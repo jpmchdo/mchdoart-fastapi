@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn instantiation to serve mchdoart-fastapi
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/root/FastApi/src
+Environment="PATH=/root/FastApi/.venv/bin"
+ExecStart=/root/FastApi/.venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker Main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
